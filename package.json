@@ -1,10 +1,10 @@
 {
-  "name": "@its-satyajit/id-generator",
+  "name": "IdGenerator-c",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "publish:jsr": "pnpm dlx jsr publish"
+    "publish": "dlx jsr publish"
   },
   "keywords": [],
   "author": "",
