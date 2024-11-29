@@ -2,11 +2,6 @@
 
 A lightweight TypeScript utility for generating various types of unique identifiers. This library provides three different ID generation methods, each optimized for specific use cases.
 
-## Installation
-
-```bash
-npm install @its-satyajit/id-generator
-```
 
 ## Usage
 
