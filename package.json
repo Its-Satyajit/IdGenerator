@@ -1,0 +1,12 @@
+{
+  "name": "IdGenerator-c",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "publish": "dlx jsr publish"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
