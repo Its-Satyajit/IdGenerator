@@ -9,7 +9,8 @@ A lightweight TypeScript utility for generating various types of unique identifi
 import { IdGenerator } from '@its-satyajit/id-generator';
 
 // Generate different types of IDs
-const id = IdGenerator.generate();         // "Zk9mP2nQ4R"
+const id = IdGenerator.generate();  // "Zk9mP2nQ4R"
+const id20 = IdGenerator.generate(); // "2sgU035ser58knde42at"           
 const shortId = IdGenerator.shortUuidV7(); // "7LJSr5nwRp9vK3mX2yD4qN"
 const timeId = IdGenerator.timeId();       // "lq1pgsk-x7y8z9w0"
 ```
@@ -18,8 +19,9 @@ const timeId = IdGenerator.timeId();       // "lq1pgsk-x7y8z9w0"
 
 ### `IdGenerator.generate()`
 
-Generates a 10-character random identifier.
+Generates a 16-character random identifier by default.
 
+- **Params**: `number` - The length of the ID to generate
 - **Returns**: `string` - A 10-character random string using base62 alphabet (a-zA-Z0-9)
 - **Use Case**: General purpose unique IDs, user-friendly references
 - **Example**: `"Zk9mP2nQ4R"`
