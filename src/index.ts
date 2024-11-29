@@ -8,7 +8,8 @@ export class IdGenerator {
   private static counter = 0;
 
   /**
-   * Generates a fixed 10-character random ID
+   * Generates a fixed 16-character random ID by default
+   * @param size The length of the ID to generate
    * @returns A 16-character random string by default
    */
   static generate(size: number = 16): string {
