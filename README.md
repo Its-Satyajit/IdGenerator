@@ -10,7 +10,7 @@ import { IdGenerator } from '@its-satyajit/id-generator';
 
 // Generate different types of IDs
 const id = IdGenerator.generate();  // "Zk9mP2nQ4R"
-const id20 = IdGenerator.generate(); // "2sgU035ser58knde42at"           
+const id20 = IdGenerator.generate(20); // "2sgU035ser58knde42at"           
 const shortId = IdGenerator.shortUuidV7(); // "7LJSr5nwRp9vK3mX2yD4qN"
 const timeId = IdGenerator.timeId();       // "lq1pgsk-x7y8z9w0"
 ```
