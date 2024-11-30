@@ -4,9 +4,19 @@
   "description": "A lightweight TypeScript utility for generating various types of unique identifiers. This library provides three different ID generation methods, each optimized for specific use cases.",
   "main": "index.js",
   "scripts": {
-    "publish:jsr": "pnpm dlx jsr publish"
+    "publish:jsr": "pnpm dlx jsr publish",
+    "build": "tsc",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "keywords": [],
   "author": "Its-Satyajit <https://github.com/Its-Satyajit>",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.7.2"
+  }
 }
