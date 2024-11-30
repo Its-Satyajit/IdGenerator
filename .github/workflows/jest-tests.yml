@@ -1,0 +1,28 @@
+name: Jest Tests
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+       node-version: [lts/*]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetches full history for comparing changes
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install Dependencies
+        run: npm install
+      - name: Run Jest Tests
+        run: npm test  # Assumes you have a test script in package.json
+        env:
+          CI: true
