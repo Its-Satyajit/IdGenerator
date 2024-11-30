@@ -1,5 +1,3 @@
-// src/id-generators/random-generator.ts
-
 import { BaseIdGenerator } from "./baseGenerator";
 
 export class RandomIdGenerator extends BaseIdGenerator {

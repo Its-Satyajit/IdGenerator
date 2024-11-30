@@ -1,5 +1,3 @@
-// src/id-generator-factory.ts
-
 import { BaseIdGenerator } from "./baseGenerator";
 import { RandomIdGenerator } from "./randomGenerator";
 import { ShortUuidV7Generator } from "./shortUuidV7Generator";
