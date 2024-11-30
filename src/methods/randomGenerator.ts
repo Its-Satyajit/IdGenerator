@@ -1,19 +1,27 @@
 import { BaseIdGenerator } from "./baseGenerator";
 
+/**
+ * A concrete ID generator that produces random IDs.
+ * This class extends the `BaseIdGenerator` and provides methods to generate random IDs of specified lengths.
+ */
 export class RandomIdGenerator extends BaseIdGenerator {
   /**
-   * Generates a fixed 16-character random ID by default
-   * @param size The length of the ID to generate
-   * @returns A random string of specified length
+   * Generates a random ID of the specified length. By default, it generates a 16-character ID.
+   * @param {number} [size=16] The length of the ID to generate.
+   * @returns {string} A random string of the specified length.
+   * @example
+   * const randomId = new RandomIdGenerator().generate(10);
    */
   generate(size: number = 16): string {
     return this.generateCustomId(size);
   }
 
   /**
-   * Generates a custom length random ID
-   * @param length The length of the ID to generate
-   * @returns A random string of the specified length
+   * Generates a custom length random ID.
+   * This method is used internally by the `generate` method to produce IDs of varying lengths.
+   * @param {number} length The length of the ID to generate.
+   * @returns {string} A random string of the specified length.
+   * @private
    */
   private generateCustomId(length: number): string {
     const bytes = this.getRandomBytes(length * 2);
