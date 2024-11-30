@@ -14,6 +14,8 @@ jobs:
         node-version: [20.x]
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetches full history for comparing changes
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -21,8 +23,6 @@ jobs:
       - name: Install Dependencies
         run: npm install
       - name: Run Jest Tests
-        run: |
-          git fetch --no-tags --depth=1 origin master
-          jest --changedSince=origin/master --coverage
+        run: npm test  # Assumes you have a test script in package.json
         env:
           CI: true
