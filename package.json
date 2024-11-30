@@ -1,6 +1,6 @@
 {
   "name": "@its-satyajit/id-generator",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "A lightweight TypeScript utility for generating various types of unique identifiers. This library provides three different ID generation methods, each optimized for specific use cases.",
   "main": "index.js",
   "scripts": {

@@ -36,7 +36,7 @@
   },
 
   // Specify which files to compile
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "src/__tests__", "src/utils/test"],
 
   "paths": {
     "@/*": ["./src/*"]

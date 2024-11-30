@@ -1,9 +1,10 @@
 {
   "name": "@its-satyajit/id-generator",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "license": "MIT",
   "exports": "./src/mod.ts",
   "publish": {
-    "include": ["LICENSE", "README.md", "src/**/*.ts"]
+    "include": ["LICENSE", "README.md", "src/**/*.ts"],
+    "exclude": ["src/__tests__/**/*", "src/utils/test/**/*"]
   }
 }
