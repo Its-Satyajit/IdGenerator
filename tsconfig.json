@@ -43,5 +43,12 @@
   },
 
   // Specify files to exclude from compilation
-  "exclude": ["node_modules", "**/*.spec.ts", "**/__tests__/**/*"]
+  "exclude": ["node_modules", "**/*.spec.ts", "**/__tests__/**/*"],
+  "typedocOptions": {
+    "entryPoints": ["src/**/*.ts"],
+    "name": "IdGenerator",
+    "readme": "README.md",
+    "out": "docs",
+    "exclude": ["**/__tests__/**/*", "**/utils/test/**/*"]
+  }
 }
