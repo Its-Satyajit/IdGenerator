@@ -1,13 +1,21 @@
 import { BaseIdGenerator } from "./baseGenerator";
 
+/**
+ * A concrete ID generator that produces UUID v7 strings.
+ * This class extends the `BaseIdGenerator` and generates UUID v7 IDs based on the RFC 9562 specification.
+ */
 export class UuidV7Generator extends BaseIdGenerator {
   private static lastTimestamp = 0n;
   private static counter = 0;
 
   /**
-   * Generates a UUID v7 string
-   * @returns A UUID v7 string
+   * Generates a UUID v7 string.
+   * The format of the UUID v7 is based on RFC 9562 and includes a 48-bit timestamp, a counter, and random bits.
+   * @returns A UUID v7 string in the format `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`.
+   * @example
+   * const uuidV7 = new UuidV7Generator().generate();
    */
+
   generate(): string {
     const timestamp = BigInt(Date.now());
 
