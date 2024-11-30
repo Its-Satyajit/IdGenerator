@@ -1,65 +1,79 @@
-// src/__tests__/id-generator.test.ts
-
 import { IdGenerator } from "../mod";
+import {
+  areIdsUnique,
+  generateMultipleIds,
+  isAlphanumeric,
+  measureIdGenerationPerformance,
+  validateUuidFormat,
+  validateUuidV7Format,
+  validateUuidV7VersionAndVariant,
+} from "../utils/test/testUtils";
 
 describe("IdGenerator", () => {
   describe("Random ID Generator", () => {
-    test("generates default 16-character random ID", () => {
+    const DEFAULT_LENGTH = 16;
+    const CUSTOM_LENGTH = 24;
+
+    test(`generates default ${DEFAULT_LENGTH}-character random ID`, () => {
       const randomId = IdGenerator.random();
-      expect(randomId).toHaveLength(16);
+      expect(randomId).toHaveLength(DEFAULT_LENGTH);
       expect(typeof randomId).toBe("string");
     });
 
-    test("generates random ID with custom length", () => {
-      const customLength = 24;
-      const randomId = IdGenerator.random(customLength);
-      expect(randomId).toHaveLength(customLength);
+    test(`generates random ID with custom length of ${CUSTOM_LENGTH}`, () => {
+      const randomId = IdGenerator.random(CUSTOM_LENGTH);
+      expect(randomId).toHaveLength(CUSTOM_LENGTH);
     });
 
     test("generates unique random IDs", () => {
-      const id1 = IdGenerator.random();
-      const id2 = IdGenerator.random();
-      expect(id1).not.toBe(id2);
+      const ids = generateMultipleIds(IdGenerator.random, 100);
+      expect(areIdsUnique(ids)).toBeTruthy();
     });
 
     test("uses only alphanumeric characters", () => {
       const randomId = IdGenerator.random();
-      const alphanumericRegex = /^[a-zA-Z0-9]+$/;
-      expect(alphanumericRegex.test(randomId)).toBeTruthy();
+      expect(isAlphanumeric(randomId)).toBeTruthy();
     });
   });
 
   describe("UUID V7 Generator", () => {
+    test("generates valid UUID format", () => {
+      const uuidV7 = IdGenerator.uuidV7();
+      expect(validateUuidFormat(uuidV7)).toBeTruthy();
+    });
+
     test("generates valid UUID v7 format", () => {
       const uuidV7 = IdGenerator.uuidV7();
-      const uuidV7Regex =
-        /^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-      expect(uuidV7Regex.test(uuidV7)).toBeTruthy();
+      expect(validateUuidV7Format(uuidV7)).toBeTruthy();
+    });
+
+    test("validates UUID v7 version and variant", () => {
+      const uuidV7 = IdGenerator.uuidV7();
+      expect(validateUuidV7VersionAndVariant(uuidV7)).toBeTruthy();
     });
 
     test("generates unique UUID v7", () => {
-      const uuid1 = IdGenerator.uuidV7();
-      const uuid2 = IdGenerator.uuidV7();
-      expect(uuid1).not.toBe(uuid2);
+      const ids = generateMultipleIds(IdGenerator.uuidV7, 100);
+      expect(areIdsUnique(ids)).toBeTruthy();
     });
   });
 
   describe("Short UUID V7 Generator", () => {
-    test("generates 22-character short UUID v7", () => {
+    const SHORT_UUID_LENGTH = 22;
+
+    test(`generates ${SHORT_UUID_LENGTH}-character short UUID v7`, () => {
       const shortUuidV7 = IdGenerator.shortUuidV7();
-      expect(shortUuidV7).toHaveLength(22);
+      expect(shortUuidV7).toHaveLength(SHORT_UUID_LENGTH);
     });
 
     test("uses only alphanumeric characters", () => {
       const shortUuidV7 = IdGenerator.shortUuidV7();
-      const alphanumericRegex = /^[a-zA-Z0-9]+$/;
-      expect(alphanumericRegex.test(shortUuidV7)).toBeTruthy();
+      expect(isAlphanumeric(shortUuidV7)).toBeTruthy();
     });
 
     test("generates unique short UUID v7", () => {
-      const uuid1 = IdGenerator.shortUuidV7();
-      const uuid2 = IdGenerator.shortUuidV7();
-      expect(uuid1).not.toBe(uuid2);
+      const ids = generateMultipleIds(IdGenerator.shortUuidV7, 100);
+      expect(areIdsUnique(ids)).toBeTruthy();
     });
   });
 
@@ -71,18 +85,15 @@ describe("IdGenerator", () => {
     });
 
     test("generates unique time-based IDs", () => {
-      const id1 = IdGenerator.timeId();
-      const id2 = IdGenerator.timeId();
-      expect(id1).not.toBe(id2);
+      const ids = generateMultipleIds(IdGenerator.timeId, 100);
+      expect(areIdsUnique(ids)).toBeTruthy();
     });
   });
 
   describe("Collision Resistance", () => {
-    const generateMultipleIds = (generator: () => string, count: number): string[] => {
-      return Array.from({ length: count }, () => generator());
-    };
+    const GENERATION_COUNT = 1000;
 
-    test("generates unique IDs across multiple generations", () => {
+    test(`generates unique IDs across ${GENERATION_COUNT} generations`, () => {
       const generators = [
         IdGenerator.random,
         IdGenerator.uuidV7,
@@ -91,16 +102,16 @@ describe("IdGenerator", () => {
       ];
 
       generators.forEach((generator) => {
-        const count = 1000;
-        const ids = generateMultipleIds(generator, count);
-        const uniqueIds = new Set(ids);
-
-        expect(uniqueIds.size).toBe(count);
+        const ids = generateMultipleIds(generator, GENERATION_COUNT);
+        expect(areIdsUnique(ids)).toBeTruthy();
       });
     });
   });
 
   describe("Performance", () => {
+    const PERFORMANCE_COUNT = 1000;
+    const MAX_DURATION = 1000; // 1 second
+
     test("generates IDs quickly", () => {
       const generators = [
         IdGenerator.random,
@@ -110,13 +121,13 @@ describe("IdGenerator", () => {
       ];
 
       generators.forEach((generator) => {
-        const start = performance.now();
-        for (let i = 0; i < 1000; i++) {
-          generator();
-        }
-        const end = performance.now();
+        const performanceResult = measureIdGenerationPerformance(
+          generator,
+          PERFORMANCE_COUNT,
+          MAX_DURATION
+        );
 
-        expect(end - start).toBeLessThan(1000); // Should complete in less than 1 second
+        expect(performanceResult.passed).toBeTruthy();
       });
     });
   });
