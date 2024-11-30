@@ -1,4 +1,8 @@
-// src/id-generators/base-generator.ts
+/**
+ * An abstract base class for generating unique identifiers.
+ * This class provides common methods and properties that can be shared among various ID generators.
+ */
+
 export abstract class BaseIdGenerator {
   protected static readonly DEFAULT_ALPHABET =
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
