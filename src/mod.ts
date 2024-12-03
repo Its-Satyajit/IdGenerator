@@ -56,4 +56,37 @@ export class id {
   static timeId(): string {
     return new TimeBasedGenerator().generate();
   }
+
+  static custom(length: number, characters: string): string {
+    // Todo
+    return `not Implemented Yet id ${length} characters ${characters} `;
+  }
+  static base64(length: number): string {
+    // Todo
+    return `not Implemented Yet id ${length}`;
+  }
+  static base62(length: number): string {
+    // Todo
+    return `not Implemented Yet id ${length} `;
+  }
+  static hash(input: string | Uint8Array): string {
+    // Todo
+    return `not Implemented Yet id ${input} `;
+  }
+  static nano(): string {
+    // Todo
+    return `not Implemented Yet `;
+  }
+  static url(length: number): string {
+    // Todo
+    return `not Implemented Yet id ${length} `;
+  }
+  static uuidV1(): string {
+    // Todo
+    return `not Implemented Yet id  `;
+  }
+  static uuidV4(): string {
+    // Todo
+    return `not Implemented Yet id  `;
+  }
 }
