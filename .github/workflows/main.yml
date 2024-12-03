@@ -11,24 +11,28 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # Write access is needed for pushing changelog changes
+      contents: write  # Write access is needed for pushing changelog changes and tags
       id-token: write
     steps:
       - uses: actions/checkout@v4
 
-      # Install dependencies (ensure you have standard-version in your package.json)
+      # Install dependencies (ensure you have the necessary configuration and release-please in package.json)
       - name: Install dependencies
         run: npm install
 
-      # Run standard-version to generate changelog and tag the commit
-      - name: Generate changelog and create tag
-        run: npx standard-version
+      # Use the release-please action to create a changelog and version tag
+      - name: Generate changelog and version
+        uses: googleapis/release-please-action@v3
+        with:
+          release-type: node
+          package-name: your-package-name  # Replace with your package name if applicable
+          versioning-strategy: increase  # Adjust strategy if needed (e.g., "auto", "increase", etc.)
 
-      # Publish the changes (this can include pushing changes to the repository)
+      # Run your publishing step (e.g., for npm or your package)
       - name: Publish
         run: npx jsr publish
 
-      # Push the changes (including changelog and tags) back to GitHub
+      # Push changes (including changelog and tags) back to GitHub
       - name: Push changes and tags back to GitHub
         run: |
           git config user.name "github-actions"
