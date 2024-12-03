@@ -12,6 +12,7 @@ import { id } from '@its-satyajit/id-generator';
 const id = id.generate();  // "Zk9mP2nQ4R"
 const id20 = id.generate(20); // "2sgU035ser58knde42at"           
 const shortId = id.shortUuidV7(); // "7LJSr5nwRp9vK3mX2yD4qN"
+const shortId = id.uuidV7()(); // "f47d08e7-9f9d-7a2e-b290-5a96f0b8c9e1"
 const timeId = id.timeId();       // "lq1pgsk-x7y8z9w0"
 ```
 
