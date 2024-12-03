@@ -99,6 +99,7 @@ All methods use the Web Crypto API (`crypto.getRandomValues()`) for secure rando
 
 ## Browser Support
 
+
 Works in all modern browsers that support the Web Crypto API:
 - Chrome ≥ 43
 - Firefox ≥ 36
