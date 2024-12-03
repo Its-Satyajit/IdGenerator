@@ -3,6 +3,10 @@
   "version": "0.1.7",
   "description": "A lightweight TypeScript utility for generating various types of unique identifiers. This library provides three different ID generation methods, each optimized for specific use cases.",
   "main": "src/mod.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Its-Satyajit/id-generator"
+  },
   "scripts": {
     "publish:jsr": "pnpm dlx jsr publish",
     "build": "tsc",
