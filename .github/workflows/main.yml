@@ -26,7 +26,7 @@ jobs:
         with:
           release-type: node
           package-name: your-package-name  # Replace with your package name if applicable
-          versioning-strategy: increase  # Adjust strategy if needed (e.g., "auto", "increase", etc.)
+          release-type: simple  # Adjust strategy if needed (e.g., "auto", "increase", etc.)
 
       # Run your publishing step (e.g., for npm or your package)
       - name: Publish
