@@ -12,7 +12,7 @@ permissions:
   pull-requests: write
 
 jobs:
-   release-please:
+  release-please:
     runs-on: ubuntu-latest
     steps:
       - uses: googleapis/release-please-action@v4
@@ -24,9 +24,8 @@ jobs:
           # this is a built-in strategy in release-please, see "Action Inputs"
           # for more options
           release-type: simple
-
   publish:
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - run: npx jsr publish
