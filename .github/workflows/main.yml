@@ -7,34 +7,26 @@ on:
     branches:
       - master
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
-  publish:
+   release-please:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write  # Write access is needed for pushing changelog changes and tags
-      id-token: write
+    steps:
+      - uses: googleapis/release-please-action@v4
+        with:
+          # this assumes that you have created a personal access token
+          # (PAT) and configured it as a GitHub action secret named
+          # `MY_RELEASE_PLEASE_TOKEN` (this secret name is not important).
+          token: ${{ secrets.MY_RELEASE_PLEASE_TOKEN }}
+          # this is a built-in strategy in release-please, see "Action Inputs"
+          # for more options
+          release-type: simple
+
+  publish:
+    runs-on: ubuntu-latest 
     steps:
       - uses: actions/checkout@v4
-
-      # Install dependencies (ensure you have the necessary configuration and release-please in package.json)
-      - name: Install dependencies
-        run: npm install
-
-      # Use the release-please action to create a changelog and version tag
-      - name: Generate changelog and version
-        uses: googleapis/release-please-action@v3
-        with:
-          release-type: node
-          package-name: your-package-name  # Replace with your package name if applicable
-          release-type: simple  # Adjust strategy if needed (e.g., "auto", "increase", etc.)
-
-      # Run your publishing step (e.g., for npm or your package)
-      - name: Publish
-        run: npx jsr publish
-
-      # Push changes (including changelog and tags) back to GitHub
-      - name: Push changes and tags back to GitHub
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git push --follow-tags
+      - run: npx jsr publish
