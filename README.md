@@ -6,31 +6,42 @@ A lightweight TypeScript utility for generating various types of unique identifi
 ## Usage
 
 ```typescript
-import { IdGenerator } from '@its-satyajit/id-generator';
+import { id } from '@its-satyajit/id-generator';
 
 // Generate different types of IDs
-const id = IdGenerator.generate();  // "Zk9mP2nQ4R"
-const id20 = IdGenerator.generate(20); // "2sgU035ser58knde42at"           
-const shortId = IdGenerator.shortUuidV7(); // "7LJSr5nwRp9vK3mX2yD4qN"
-const timeId = IdGenerator.timeId();       // "lq1pgsk-x7y8z9w0"
+const id = id.generate();  // "Zk9mP2nQ4R"
+const id20 = id.generate(20); // "2sgU035ser58knde42at"           
+const shortId = id.shortUuidV7(); // "7LJSr5nwRp9vK3mX2yD4qN"
+const timeId = id.timeId();       // "lq1pgsk-x7y8z9w0"
 ```
 
 ## API Reference
 
-### `IdGenerator.generate()`
+### `id.generate()`
 
 Generates a 16-character random identifier by default.
 
 - **Params**: `number` - The length of the ID to generate
-- **Returns**: `string` - A 10-character random string using base62 alphabet (a-zA-Z0-9)
+- **Returns**: `string` - A 16  -character random string by default using base62 alphabet (a-zA-Z0-9)
 - **Use Case**: General purpose unique IDs, user-friendly references
 - **Example**: `"Zk9mP2nQ4R"`
 
-### `IdGenerator.shortUuidV7()`
+### `id.uuidV7()`
+
+Generates a uuid v7 identifier.
+
+- **Returns**: `string` -  A 128 bits containing timestamp and random data
+- **Use Case**: Database records, distributed systems, time-sortable unique IDs
+- **Features**:
+  - Timestamp-sortable
+  - Millisecond precision
+  - Monotonic sequence within the same millisecond
+- **Example**: `"f47d08e7-9f9d-7a2e-b290-5a96f0b8c9e1"`
+### `id.shortUuidV7()`
 
 Generates a 22-character timestamp-based identifier based on UUID v7 specification.
 
-- **Returns**: `string` - A 22-character string containing timestamp and random data
+- **Returns**: `string` - A   36-character string containing timestamp and random data
 - **Use Case**: Database records, distributed systems, time-sortable unique IDs
 - **Features**:
   - Timestamp-sortable
@@ -38,7 +49,7 @@ Generates a 22-character timestamp-based identifier based on UUID v7 specificati
   - Monotonic sequence within the same millisecond
 - **Example**: `"7LJSr5nwRp9vK3mX2yD4qN"`
 
-### `IdGenerator.timeId()`
+### `id.timeId()`
 
 Generates a human-readable time-based identifier.
 
@@ -74,7 +85,8 @@ All methods use the Web Crypto API (`crypto.getRandomValues()`) for secure rando
 
 | Method | Length | Sortable | Time-Based | Format |
 |--------|---------|-----------|------------|---------|
-| `generate()` | 10 | No | No | Random |
+| `generate()` | 16/any | No | No | Random |
+| `uuidV7()` | 22 | Yes | Yes | Timestamp + Random |
 | `shortUuidV7()` | 22 | Yes | Yes | Timestamp + Random |
 | `timeId()` | Variable | Yes | Yes | Timestamp-Random |
 
