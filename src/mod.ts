@@ -5,9 +5,9 @@ import { UuidV7Generator } from "./methods/uuidV7Generator";
 
 /**
  * A utility class for generating various types of IDs.
- * @class IdGenerator
+ * @class id
  */
-export class IdGenerator {
+export class id {
   /**
    * Generates a random ID.
    * @method random
