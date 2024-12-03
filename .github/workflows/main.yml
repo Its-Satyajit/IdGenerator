@@ -11,8 +11,26 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      id-token: write # The OIDC ID token is used for authentication with JSR.
+      contents: write  # Write access is needed for pushing changelog changes
+      id-token: write
     steps:
       - uses: actions/checkout@v4
-      - run: npx jsr publish
+
+      # Install dependencies (ensure you have standard-version in your package.json)
+      - name: Install dependencies
+        run: npm install
+
+      # Run standard-version to generate changelog and tag the commit
+      - name: Generate changelog and create tag
+        run: npx standard-version
+
+      # Publish the changes (this can include pushing changes to the repository)
+      - name: Publish
+        run: npx jsr publish
+
+      # Push the changes (including changelog and tags) back to GitHub
+      - name: Push changes and tags back to GitHub
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git push --follow-tags
