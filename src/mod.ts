@@ -1,3 +1,4 @@
+import { base62Generator } from "./methods/base62Generator";
 import { base64Generator } from "./methods/base64Generator";
 import { customIDGenerator } from "./methods/customIDGenerator";
 import { generateRandomId } from "./methods/randomIDGenerator";
@@ -65,11 +66,11 @@ export const id = {
   base64: (length: number) => base64Generator(length),
 
   /**
-   * Base62 ID generator (not implemented yet).
+   * Base62 ID generator.
    * @param {number} length - Length of the ID.
    * @returns {string} Base62 ID string.
    */
-  base62: (length: number) => `not Implemented Yet id ${length} `,
+  base62: (length?: number) => base62Generator(length),
 
   /**
    * Hash ID generator (not implemented yet).
@@ -103,5 +104,3 @@ export const id = {
    */
   uuidV4: () => `not Implemented Yet id  `,
 };
-
-console.log(id.base64(6));
