@@ -1,4 +1,4 @@
-export function generateUUIDv1() {
+export function generateUUIDv1(): string {
   // Helper function to generate a random 48-bit node (MAC address emulation)
   function generateNode() {
     const node = Math.floor(Math.random() * (1 << 48)); // Random 48-bit node (MAC address)
