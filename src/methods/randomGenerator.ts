@@ -16,6 +16,12 @@ export class RandomIdGenerator extends BaseIdGenerator {
     return this.generateCustomId(size);
   }
 
+  validate(input: string) {
+    // Define a regex pattern that matches the generated ID format
+    const idPattern = /^[a-zA-Z0-9]{16}$/; // Example pattern (16-character alphanumeric)
+    return idPattern.test(input);
+  }
+
   /**
    * Generates a custom length random ID.
    * This method is used internally by the `generate` method to produce IDs of varying lengths.

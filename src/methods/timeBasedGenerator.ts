@@ -20,4 +20,9 @@ export class TimeBasedGenerator extends BaseIdGenerator {
     const random = new RandomIdGenerator().generate(8);
     return `${timestamp}-${random}`;
   }
+
+  validate(id: string): boolean {
+    console.log(id);
+    return true;
+  }
 }
