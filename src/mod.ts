@@ -1,3 +1,4 @@
+import { base64Generator } from "./methods/base64Generator";
 import { customIDGenerator } from "./methods/customIDGenerator";
 import { generateRandomId } from "./methods/randomIDGenerator";
 import { generateShortUuidV7 } from "./methods/shortUuidV7Generator";
@@ -7,7 +8,7 @@ import { generateUuidV7 } from "./methods/uuidV7Generator";
 /**
  * A utility object for generating various types of IDs.
  */
-const id = {
+export const id = {
   /**
    * Generates a random ID.
    * @param {number} [size=16] - Optional length of the ID.
@@ -54,11 +55,14 @@ const id = {
   custom: (length: number, characters: string) => customIDGenerator(length, characters),
 
   /**
-   * Base64 ID generator (not implemented yet).
+   * Optimized Base64 ID generator.
+   * Generates a random string and returns it in Base64 format, optimized for performance.
    * @param {number} length - Length of the ID.
    * @returns {string} Base64 ID string.
+   * @example
+   * const base64Id = id.base64(10);
    */
-  base64: (length: number) => `not Implemented Yet id ${length}`,
+  base64: (length: number) => base64Generator(length),
 
   /**
    * Base62 ID generator (not implemented yet).
@@ -100,4 +104,4 @@ const id = {
   uuidV4: () => `not Implemented Yet id  `,
 };
 
-export { id };
+console.log(id.base64(6));
