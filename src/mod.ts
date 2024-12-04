@@ -1,6 +1,7 @@
 import { base62Generator } from "./methods/base62Generator";
 import { base64Generator } from "./methods/base64Generator";
 import { customIDGenerator } from "./methods/customIDGenerator";
+import { generateHashId } from "./methods/hashIdGenerator";
 import { generateRandomId } from "./methods/randomIDGenerator";
 import { generateShortUuidV7 } from "./methods/shortUuidV7Generator";
 import { generateTimeBasedId } from "./methods/timeBasedGenerator";
@@ -77,7 +78,7 @@ export const id = {
    * @param {string | Uint8Array} input - Input to hash.
    * @returns {string} Hash ID string.
    */
-  hash: (input: string | Uint8Array) => `not Implemented Yet id ${input} `,
+  hash: (input: string | Uint8Array): string => generateHashId(input),
 
   /**
    * Nano ID generator (not implemented yet).
@@ -104,3 +105,5 @@ export const id = {
    */
   uuidV4: () => `not Implemented Yet id  `,
 };
+
+console.log(id.hash(new Uint8Array([21, 31, 12, 23])));
