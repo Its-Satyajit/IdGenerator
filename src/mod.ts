@@ -1,59 +1,116 @@
-import { RandomIdGenerator } from "./methods/randomGenerator";
-import { ShortUuidV7Generator } from "./methods/shortUuidV7Generator";
-import { TimeBasedGenerator } from "./methods/timeBasedGenerator";
-import { UuidV7Generator } from "./methods/uuidV7Generator";
+import { base62Generator } from './methods/base62Generator';
+import { base64Generator } from './methods/base64Generator';
+import { customIDGenerator } from './methods/customIDGenerator';
+import { generateHashId } from './methods/hashIdGenerator';
+import { nanoGenerator } from './methods/nanoGenerator';
+import { generateRandomId } from './methods/randomIDGenerator';
+import { generateShortUuidV7 } from './methods/shortUuidV7Generator';
+import { generateTimeBasedId } from './methods/timeBasedGenerator';
+import { generateUUIDv1 } from './methods/uuidV1Generator';
+import { generateUuidV7 } from './methods/uuidV7Generator';
 
 /**
- * A utility class for generating various types of IDs.
- * @class id
+ * A utility object for generating various types of IDs.
  */
-export class id {
+export const id = {
   /**
    * Generates a random ID.
-   * @method random
-   * @static
    * @param {number} [size=16] - Optional length of the ID.
    * @returns {string} Random ID string.
    * @example
-   * const randomId = IdGenerator.random(10);
+   * const randomId = id.random(10);
    */
-  static random(size?: number): string {
-    return new RandomIdGenerator().generate(size);
-  }
+  random: (size?: number) => generateRandomId(size),
 
   /**
    * Generates a full UUID v7.
-   * @method uuidV7
-   * @static
    * @returns {string} UUID v7 string.
    * @example
-   * const uuidV7 = IdGenerator.uuidV7();
+   * const uuidV7 = id.uuidV7();
    */
-  static uuidV7(): string {
-    return new UuidV7Generator().generate();
-  }
+  uuidV7: () => generateUuidV7(),
 
   /**
    * Generates a short UUID v7 (22 characters).
-   * @method shortUuidV7
-   * @static
    * @returns {string} Short UUID v7 string.
    * @example
-   * const shortUuidV7 = IdGenerator.shortUuidV7();
+   * const shortUuidV7 = id.shortUuidV7();
    */
-  static shortUuidV7(): string {
-    return new ShortUuidV7Generator().generate();
-  }
+  shortUuidV7: () => generateShortUuidV7(),
 
   /**
    * Generates a time-based ID.
-   * @method timeId
-   * @static
    * @returns {string} Time-based ID string.
    * @example
-   * const timeId = IdGenerator.timeId();
+   * const timeId = id.timeId();
    */
-  static timeId(): string {
-    return new TimeBasedGenerator().generate();
-  }
-}
+  timeId: () => generateTimeBasedId(),
+
+  /**
+   * Generates a random unique ID with the specified length and characters.
+   * Appends a timestamp to ensure uniqueness.
+   *
+   * @param {number} length - The length of the generated ID.
+   * @param {string} characters - The string of characters from which the ID is generated.
+   * @returns {string} A randomly generated string of the specified length with a timestamp.
+   * @example
+   * const customId = id.custom(10, 'abcdefghijklmnoxyzABCDEFGHIJKLMNVWXYZ012');
+   */
+  custom: (length: number, characters: string) => customIDGenerator(length, characters),
+
+  /**
+   * Optimized Base64 ID generator.
+   * Generates a random string and returns it in Base64 format, optimized for performance.
+   * @param {number} length - Length of the ID.
+   * @returns {string} Base64 ID string.
+   * @example
+   * const base64Id = id.base64(10);
+   */
+  base64: (length: number) => base64Generator(length),
+
+  /**
+   * Base62 ID generator.
+   * @param {number} length - Length of the ID.
+   * @returns {string} Base62 ID string.
+   */
+  base62: (length?: number) => base62Generator(length),
+
+  /**
+   * Hash ID generator (Experimental! Not Ready For Production).
+   * @param {string | Uint8Array} input - Input to hash.
+   * @returns {string} Hash ID string.
+   * @example
+   * const hashId = id.hash('some data');
+   */
+
+  hash: (input: string | Uint8Array): string => generateHashId(input),
+
+  /**
+   * Nano ID generator
+   * @returns {string} Nano ID string.
+   * @example
+   * const nanoId = id.nano();
+   */
+  nano: (length: number): string => nanoGenerator(length),
+
+  /**
+   * URL ID generator (not implemented yet).
+   * @param {number} length - Length of the ID.
+   * @returns {string} URL ID string.
+   */
+  url: (length: number) => `not Implemented Yet id ${length}`,
+
+  /**
+   * UUID v1 generator. (Experimental! Not Ready For Production - Has bugs)
+   * @returns {string} UUID v1 string.
+   */
+  uuidV1: () => generateUUIDv1(),
+
+  /**
+   * UUID v4 generator (not implemented yet).
+   * @returns {string} UUID v4 string.
+   */
+  uuidV4: () => `not Implemented Yet id`,
+};
+
+console.log(id.uuidV1());
