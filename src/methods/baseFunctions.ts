@@ -1,5 +1,5 @@
 export const DEFAULT_ALPHABET =
-  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_";
 
 export function getRandomBytes(length: number): Uint8Array {
   const bytes = new Uint8Array(length);

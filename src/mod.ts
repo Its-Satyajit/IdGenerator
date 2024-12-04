@@ -2,6 +2,7 @@ import { base62Generator } from "./methods/base62Generator";
 import { base64Generator } from "./methods/base64Generator";
 import { customIDGenerator } from "./methods/customIDGenerator";
 import { generateHashId } from "./methods/hashIdGenerator";
+import { nanoGenerator } from "./methods/nanoGenerator";
 import { generateRandomId } from "./methods/randomIDGenerator";
 import { generateShortUuidV7 } from "./methods/shortUuidV7Generator";
 import { generateTimeBasedId } from "./methods/timeBasedGenerator";
@@ -74,17 +75,21 @@ export const id = {
   base62: (length?: number) => base62Generator(length),
 
   /**
-   * Hash ID generator (not implemented yet).
+   * Hash ID generator (Experimental! Not Ready For Production).
    * @param {string | Uint8Array} input - Input to hash.
    * @returns {string} Hash ID string.
+   * @example
+   * const hashId = id.hash('some data');
    */
   hash: (input: string | Uint8Array): string => generateHashId(input),
 
   /**
-   * Nano ID generator (not implemented yet).
+   * Nano ID generator
    * @returns {string} Nano ID string.
+   * @example
+   * const nanoId = id.nano();
    */
-  nano: () => `not Implemented Yet `,
+  nano: (length: number): string => nanoGenerator(length),
 
   /**
    * URL ID generator (not implemented yet).
@@ -106,4 +111,4 @@ export const id = {
   uuidV4: () => `not Implemented Yet id  `,
 };
 
-console.log(id.hash(new Uint8Array([21, 31, 12, 11, 45, 65, 76, 23, 75])));
+console.log(id.nano(15));
