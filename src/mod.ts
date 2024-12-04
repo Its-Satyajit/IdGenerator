@@ -20,7 +20,7 @@ export const id = {
    * @example
    * const randomId = id.random(10);
    */
-  random: (size?: number) => generateRandomId(size),
+  random: (size?: number): string => generateRandomId(size),
 
   /**
    * Generates a full UUID v7.
@@ -28,7 +28,7 @@ export const id = {
    * @example
    * const uuidV7 = id.uuidV7();
    */
-  uuidV7: () => generateUuidV7(),
+  uuidV7: (): string => generateUuidV7(),
 
   /**
    * Generates a short UUID v7 (22 characters).
@@ -36,7 +36,7 @@ export const id = {
    * @example
    * const shortUuidV7 = id.shortUuidV7();
    */
-  shortUuidV7: () => generateShortUuidV7(),
+  shortUuidV7: (): string => generateShortUuidV7(),
 
   /**
    * Generates a time-based ID.
@@ -44,7 +44,7 @@ export const id = {
    * @example
    * const timeId = id.timeId();
    */
-  timeId: () => generateTimeBasedId(),
+  timeId: (): string => generateTimeBasedId(),
 
   /**
    * Generates a random unique ID with the specified length and characters.
@@ -56,7 +56,8 @@ export const id = {
    * @example
    * const customId = id.custom(10, 'abcdefghijklmnoxyzABCDEFGHIJKLMNVWXYZ012');
    */
-  custom: (length: number, characters: string) => customIDGenerator(length, characters),
+  custom: (length: number, characters: string): string =>
+    customIDGenerator(length, characters),
 
   /**
    * Optimized Base64 ID generator.
@@ -66,14 +67,14 @@ export const id = {
    * @example
    * const base64Id = id.base64(10);
    */
-  base64: (length: number) => base64Generator(length),
+  base64: (length: number): string => base64Generator(length),
 
   /**
    * Base62 ID generator.
    * @param {number} length - Length of the ID.
    * @returns {string} Base62 ID string.
    */
-  base62: (length?: number) => base62Generator(length),
+  base62: (length?: number): string => base62Generator(length),
 
   /**
    * Hash ID generator (Experimental! Not Ready For Production).
@@ -98,19 +99,19 @@ export const id = {
    * @param {number} length - Length of the ID.
    * @returns {string} URL ID string.
    */
-  url: (length: number) => `not Implemented Yet id ${length}`,
+  url: (length: number): string => `not Implemented Yet id ${length}`,
 
   /**
    * UUID v1 generator. (Experimental! Not Ready For Production - Has bugs)
    * @returns {string} UUID v1 string.
    */
-  uuidV1: () => generateUUIDv1(),
+  uuidV1: (): string => generateUUIDv1(),
 
   /**
    * UUID v4 generator (not implemented yet).
    * @returns {string} UUID v4 string.
    */
-  uuidV4: () => `not Implemented Yet id`,
+  uuidV4: (): string => `not Implemented Yet id`,
 };
 
 console.log(id.uuidV1());

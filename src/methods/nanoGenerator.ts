@@ -3,7 +3,7 @@
  * @param {number} [length=21] - Length of the generated ID.
  * @returns {string} Nano ID string.
  */
-export const nanoGenerator = (length = 21) => {
+export const nanoGenerator = (length = 21): string => {
   // URL-safe characters (letters, digits)
   const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_";
   let result = "";
