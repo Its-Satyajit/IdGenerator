@@ -5,7 +5,7 @@ import { DEFAULT_ALPHABET } from "./baseFunctions";
  * @param {number} length - Length of the ID.
  * @returns {string} Base62 ID string.
  */
-let counter = 0; // Counter to make sure IDs are unique even when generated at the same millisecond
+// let counter = 0; // Counter to make sure IDs are unique even when generated at the same millisecond
 
 export const base62Generator = (length: number = 10): string => {
   const timestamp = Date.now();
