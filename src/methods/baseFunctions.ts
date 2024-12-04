@@ -1,5 +1,4 @@
-export const DEFAULT_ALPHABET =
-  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_";
+export const DEFAULT_ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
 export function getRandomBytes(length: number): Uint8Array {
   const bytes = new Uint8Array(length);
@@ -21,8 +20,6 @@ export function toBase(num: bigint, alphabet: string = DEFAULT_ALPHABET): string
 
   return result;
 }
-
-
 
 /**
  * Encodes a given number (like a timestamp) into a string using the allowed characters.

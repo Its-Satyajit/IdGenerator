@@ -1,12 +1,13 @@
-import { base62Generator } from "./methods/base62Generator";
-import { base64Generator } from "./methods/base64Generator";
-import { customIDGenerator } from "./methods/customIDGenerator";
-import { generateHashId } from "./methods/hashIdGenerator";
-import { nanoGenerator } from "./methods/nanoGenerator";
-import { generateRandomId } from "./methods/randomIDGenerator";
-import { generateShortUuidV7 } from "./methods/shortUuidV7Generator";
-import { generateTimeBasedId } from "./methods/timeBasedGenerator";
-import { generateUuidV7 } from "./methods/uuidV7Generator";
+import { base62Generator } from './methods/base62Generator';
+import { base64Generator } from './methods/base64Generator';
+import { customIDGenerator } from './methods/customIDGenerator';
+import { generateHashId } from './methods/hashIdGenerator';
+import { nanoGenerator } from './methods/nanoGenerator';
+import { generateRandomId } from './methods/randomIDGenerator';
+import { generateShortUuidV7 } from './methods/shortUuidV7Generator';
+import { generateTimeBasedId } from './methods/timeBasedGenerator';
+import { generateUUIDv1 } from './methods/uuidV1Generator';
+import { generateUuidV7 } from './methods/uuidV7Generator';
 
 /**
  * A utility object for generating various types of IDs.
@@ -81,6 +82,7 @@ export const id = {
    * @example
    * const hashId = id.hash('some data');
    */
+
   hash: (input: string | Uint8Array): string => generateHashId(input),
 
   /**
@@ -96,19 +98,19 @@ export const id = {
    * @param {number} length - Length of the ID.
    * @returns {string} URL ID string.
    */
-  url: (length: number) => `not Implemented Yet id ${length} `,
+  url: (length: number) => `not Implemented Yet id ${length}`,
 
   /**
-   * UUID v1 generator (not implemented yet).
+   * UUID v1 generator. (Experimental! Not Ready For Production - Has bugs)
    * @returns {string} UUID v1 string.
    */
-  uuidV1: () => `not Implemented Yet id  `,
+  uuidV1: () => generateUUIDv1(),
 
   /**
    * UUID v4 generator (not implemented yet).
    * @returns {string} UUID v4 string.
    */
-  uuidV4: () => `not Implemented Yet id  `,
+  uuidV4: () => `not Implemented Yet id`,
 };
 
-console.log(id.nano(15));
+console.log(id.uuidV1());

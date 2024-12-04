@@ -1,5 +1,3 @@
-import { DEFAULT_ALPHABET } from "./baseFunctions";
-
 /**
  * Nano ID generator (No dependencies, works in both browser and Node.js, URL-safe).
  * @param {number} [length=21] - Length of the generated ID.
@@ -7,7 +5,7 @@ import { DEFAULT_ALPHABET } from "./baseFunctions";
  */
 export const nanoGenerator = (length = 21) => {
   // URL-safe characters (letters, digits)
-  const chars = DEFAULT_ALPHABET;
+  const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_";
   let result = "";
 
   // Check if we are in a browser environment
