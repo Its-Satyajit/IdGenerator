@@ -1,7 +1,8 @@
-import { generateRandomId } from './methods/randomIDGenerator';
-import { generateShortUuidV7 } from './methods/shortUuidV7Generator';
-import { generateTimeBasedId } from './methods/timeBasedGenerator';
-import { generateUuidV7 } from './methods/uuidV7Generator';
+import { customIDGenerator } from "./methods/customIDGenerator";
+import { generateRandomId } from "./methods/randomIDGenerator";
+import { generateShortUuidV7 } from "./methods/shortUuidV7Generator";
+import { generateTimeBasedId } from "./methods/timeBasedGenerator";
+import { generateUuidV7 } from "./methods/uuidV7Generator";
 
 /**
  * A utility object for generating various types of IDs.
@@ -41,13 +42,16 @@ const id = {
   timeId: () => generateTimeBasedId(),
 
   /**
-   * Custom ID generator (not implemented yet).
-   * @param {number} length - Length of the ID.
-   * @param {string} characters - Characters to use.
-   * @returns {string} Custom ID string.
+   * Generates a random unique ID with the specified length and characters.
+   * Appends a timestamp to ensure uniqueness.
+   *
+   * @param {number} length - The length of the generated ID.
+   * @param {string} characters - The string of characters from which the ID is generated.
+   * @returns {string} A randomly generated string of the specified length with a timestamp.
+   * @example
+   * const customId = id.custom(10, 'abcdefghijklmnoxyzABCDEFGHIJKLMNVWXYZ012');
    */
-  custom: (length: number, characters: string) =>
-    `not Implemented Yet id ${length} characters ${characters} `,
+  custom: (length: number, characters: string) => customIDGenerator(length, characters),
 
   /**
    * Base64 ID generator (not implemented yet).

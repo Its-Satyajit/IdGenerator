@@ -21,3 +21,24 @@ export function toBase(num: bigint, alphabet: string = DEFAULT_ALPHABET): string
 
   return result;
 }
+
+
+
+/**
+ * Encodes a given number (like a timestamp) into a string using the allowed characters.
+ *
+ * @param {number} timeStamp - The number to encode (e.g., timestamp).
+ * @param {string} characters - The allowed characters for encoding.
+ * @returns {string} The encoded string.
+ */
+export const encodeTimestamp = (timeStamp: number, characters: string): string => {
+  const charactersLength = characters.length;
+  let encoded = "";
+
+  while (timeStamp > 0) {
+    encoded = characters[timeStamp % charactersLength] + encoded;
+    timeStamp = Math.floor(timeStamp / charactersLength);
+  }
+
+  return encoded;
+};
