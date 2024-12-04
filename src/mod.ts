@@ -106,4 +106,4 @@ export const id = {
   uuidV4: () => `not Implemented Yet id  `,
 };
 
-console.log(id.hash(new Uint8Array([21, 31, 12, 23])));
+console.log(id.hash(new Uint8Array([21, 31, 12, 11, 45, 65, 76, 23, 75])));

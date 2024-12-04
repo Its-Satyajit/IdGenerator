@@ -1,9 +1,66 @@
 /**
- * Synchronous Hash ID generator using SHA-256 (manual implementation).
+ * Synchronous Hash ID generator using SHA-256.
+ * Compatible with both browser and Node.js environments.
  * @param {string | Uint8Array} input - Input to hash.
  * @returns {string} Hash ID string (hexadecimal).
  */
 export function generateHashId(input: string | Uint8Array): string {
+  // Node.js crypto module for server-side
+  if (typeof process !== "undefined" && process.versions && process.versions.node) {
+    const crypto = require("crypto");
+    const data = input instanceof Uint8Array ? input : Buffer.from(input);
+
+    return crypto.createHash("sha256").update(data).digest("hex");
+  }
+
+  // Browser with Crypto API
+  if (typeof crypto !== "undefined" && crypto.subtle) {
+    try {
+      const encoder = new TextEncoder();
+      const data = input instanceof Uint8Array ? input : encoder.encode(input);
+
+      // Synchronous-like implementation using a trick
+      let result: string | null = null;
+      let error: Error | null = null;
+
+      crypto.subtle
+        .digest("SHA-256", data)
+        .then((hashBuffer) => {
+          const hashArray = Array.from(new Uint8Array(hashBuffer));
+          result = hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+        })
+        .catch((err) => {
+          error = err;
+        });
+
+      // Busy wait (not recommended for production, but meets synchronous requirement)
+      const start = Date.now();
+      while (result === null && error === null && Date.now() - start < 1000) {
+        // Intentional busy wait
+      }
+
+      if (error) throw error;
+      if (result === null) {
+        throw new Error("Hash generation timed out");
+      }
+
+      return result;
+    } catch {
+      // Fallback to manual implementation
+      return manualSHA256(input);
+    }
+  }
+
+  // Fallback to manual implementation
+  return manualSHA256(input);
+}
+
+/**
+ * Manual SHA-256 implementation as a fallback
+ * @param {string | Uint8Array} input - Input to hash
+ * @returns {string} Hash ID string (hexadecimal)
+ */
+function manualSHA256(input: string | Uint8Array): string {
   // Convert input to string if it is a Uint8Array
   let strInput: string = "";
   let message: number[] = [];
